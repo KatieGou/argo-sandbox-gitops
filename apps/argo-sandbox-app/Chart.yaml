@@ -1,0 +1,5 @@
+apiVersion: v2
+name: argo-sandbox-app
+description: Hello app that Argo CD deploys from this repo
+type: application
+version: 0.1.0

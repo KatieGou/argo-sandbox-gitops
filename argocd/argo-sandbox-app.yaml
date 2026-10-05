@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-sandbox-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # deleting the Application also deletes what it deployed
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KatieGou/argo-sandbox-gitops.git # public repo, so no credentials needed
+    targetRevision: main
+    path: apps/argo-sandbox-app
+  destination:
+    server: https://kubernetes.default.svc # "this same cluster"
+    namespace: argo-sandbox-app
+  syncPolicy:
+    automated:
+      prune: true # remove things that were deleted from Git
+      selfHeal: true # undo manual changes made in the cluster
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: 127745533311.dkr.ecr.eu-north-1.amazonaws.com/argo-sandbox-app
+  # The line CI will bump in Stage 4. Must be a tag that already exists in ECR.
+  tag: v0.1.0
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 64Mi
